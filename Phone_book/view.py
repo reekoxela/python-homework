@@ -18,6 +18,7 @@ def menu():
         except:
             print('Выберите пункт меню, цифры от 1 до 8')
 
+
 def show_contacts(pb: list[dict]):
     if pb == []:
         print('\nТелефонная книга пуста или файл не открыт!\n')

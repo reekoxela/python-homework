@@ -26,6 +26,7 @@ class PhoneBook:
                 with open(self.path, 'w', encoding='UTF-8') as file:
                     print(f'Файл {self.path} создан')
 
+
     def save_file(self):
         data = []
         for contact in self.phone_book:

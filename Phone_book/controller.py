@@ -40,4 +40,3 @@ def start():
                         pb.save_file()
                 print('\nДо свидания!')
                 break
-
