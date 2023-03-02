@@ -8,17 +8,23 @@ class PhoneBook:
         self.old_phone_book = []
 
     def open_file(self):
-        with open(self.path, 'r', encoding='UTF-8') as file:
-            data = file.readlines()
-            for contact in data:
-                new = contact.strip().split(';')
-                new_contact = {}
-                new_contact['name'] = new[0]
-                new_contact['phone'] = new[1]
-                new_contact['comment'] = new[2]
-                self.phone_book.append(new_contact)
-        self.old_phone_book = self.phone_book[:]
-        print('\nТелефонная книга загружена!\n')
+        try:
+            with open(self.path, 'r', encoding='UTF-8') as file:
+                data = file.readlines()
+                for contact in data:
+                    new = contact.strip().split(';')
+                    new_contact = {}
+                    new_contact['name'] = new[0]
+                    new_contact['phone'] = new[1]
+                    new_contact['comment'] = new[2]
+                    self.phone_book.append(new_contact)
+            self.old_phone_book = self.phone_book[:]
+            print(f'\nТелефонная книга {self.path} загружена!\n')
+        except:
+            answer = input(f'\nФайла {self.path} не существует! Создать файл? (y/n)')
+            if answer == 'y':
+                with open(self.path, 'w', encoding='UTF-8') as file:
+                    print(f'Файл {self.path} создан')
 
     def save_file(self):
         data = []
@@ -46,8 +52,10 @@ class PhoneBook:
         return all_find
 
     def change_contact(self, ind: int, contact: dict):
+        old_name = contact.get("name")
         self.phone_book.pop(ind - 1)
         self.phone_book.insert(ind - 1, contact)
+        print(f'Контакт успешно изменен!')
 
     def delete_contact(self, ind: int):
         contact = self.phone_book.pop(ind - 1)
